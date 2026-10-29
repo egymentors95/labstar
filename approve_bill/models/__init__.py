@@ -1,0 +1,1 @@
+from . import _inherit_account_move

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="account_move_approval_inherited">
+        <field name="name">account.move.approval.inherited</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//button[@name='action_post']" position="before">
+                <button
+                        name="action_approved"
+                        string="Approve"
+                        type="object"
+                        class="btn-primary"
+                        invisible="state != 'draft' or state == 'posted'"
+                />
+            </xpath>
+
+            <xpath expr="//button[@name='action_post'][2]" position="attributes">
+                <attribute name="invisible">state != 'approved'
+                </attribute>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>
