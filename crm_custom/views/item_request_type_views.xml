@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_item_request_type_list" model="ir.ui.view">
+        <field name="name">item.request.type.list</field>
+        <field name="model">item.request.type</field>
+        <field name="arch" type="xml">
+            <list string="Item Request Types" default_order="sequence, name">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_item_request_type_form" model="ir.ui.view">
+        <field name="name">item.request.type.form</field>
+        <field name="model">item.request.type</field>
+        <field name="arch" type="xml">
+            <form string="Item Request Type">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="sequence"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_item_request_type" model="ir.actions.act_window">
+        <field name="name">Item Request Types</field>
+        <field name="res_model">item.request.type</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem
+        id="menu_crm_item_request_types"
+        name="Item Request Types"
+        parent="crm.crm_menu_config"
+        action="action_item_request_type"
+        sequence="20"
+        groups="sales_team.group_sale_manager"/>
+</odoo>
