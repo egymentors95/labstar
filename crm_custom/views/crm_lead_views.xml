@@ -12,34 +12,32 @@
                 <field name="agent"/>
             </xpath>
             <xpath expr="//notebook/page[@name='internal_notes']" position="after">
-                <page name="customer_details" string="Customer Details">
-                    <group>
-                        <group string="Customer Information">
-                            <field name="partner_name" string="Customer Name" invisible="type == 'opportunity'"/>
-                            <field name="partner_id" string="Customer Name" invisible="type == 'lead'"/>
-                            <label for="street_customer_details" string="Address"/>
-                            <div class="o_address_format">
-                                <field name="street" id="street_customer_details" placeholder="Street..." class="o_address_street"/>
-                                <field name="street2" placeholder="Street 2..." class="o_address_street"/>
-                                <field name="city" placeholder="City" class="o_address_city"/>
-                                <field name="state_id" class="o_address_state" placeholder="State" options="{'no_open': True}"/>
-                                <field name="zip" placeholder="ZIP" class="o_address_zip"/>
-                                <field name="country_id" class="o_address_country" placeholder="Country" options="{'no_open': True, 'no_create': True}"/>
-                            </div>
-                        </group>
-                        <group string="Contact Information">
-                            <field name="contact_name" string="Contact Person"/>
-                            <field name="phone" string="Contact Number" widget="phone"/>
-                            <field name="email_from" string="Email Address" widget="email"/>
-                        </group>
-                    </group>
-                </page>
+<!--                <page name="customer_details" string="Customer Details">-->
+<!--                    <group>-->
+<!--                        <group string="Customer Information">-->
+<!--                            <field name="partner_name" string="Customer Name" invisible="type == 'opportunity'"/>-->
+<!--                            <field name="partner_id" string="Customer Name" invisible="type == 'lead'"/>-->
+<!--                            <label for="street_customer_details" string="Address"/>-->
+<!--                            <div class="o_address_format">-->
+<!--                                <field name="street" id="street_customer_details" placeholder="Street..." class="o_address_street"/>-->
+<!--                                <field name="street2" placeholder="Street 2..." class="o_address_street"/>-->
+<!--                                <field name="city" placeholder="City" class="o_address_city"/>-->
+<!--                                <field name="state_id" class="o_address_state" placeholder="State" options="{'no_open': True}"/>-->
+<!--                                <field name="zip" placeholder="ZIP" class="o_address_zip"/>-->
+<!--                                <field name="country_id" class="o_address_country" placeholder="Country" options="{'no_open': True, 'no_create': True}"/>-->
+<!--                            </div>-->
+<!--                        </group>-->
+<!--                        <group string="Contact Information">-->
+<!--                            <field name="contact_name" string="Contact Person"/>-->
+<!--                            <field name="phone" string="Contact Number" widget="phone"/>-->
+<!--                            <field name="email_from" string="Email Address" widget="email"/>-->
+<!--                        </group>-->
+<!--                    </group>-->
+<!--                </page>-->
                 <page name="item_requirements" string="Item Requirements" invisible="type == 'lead'">
-                    <group>
-                        <field name="item_request_type"/>
                         <field name="item_request_line_ids" nolabel="1" context="{'default_item_request_type': item_request_type}">
                             <list editable="bottom">
-                                <field name="item_request_type"/>
+                                <field name="item_request_type" string="Product Category"/>
                                 <field name="name"/>
                                 <field name="current_supplier_id"/>
                                 <field name="quantity"/>
@@ -47,7 +45,6 @@
                                 <field name="currency_id" column_invisible="True"/>
                             </list>
                         </field>
-                    </group>
                 </page>
             </xpath>
         </field>
