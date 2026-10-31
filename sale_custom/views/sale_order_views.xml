@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_order_form_inherit_sale_custom" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.sale_custom</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/list/field[@name='product_uom_id']" position="after">
+                <field name="base_uom_qty" string="Base Unit Value" optional="show"/>
+                <field name="base_uom_id" string="Base Unit" optional="show"
+                       options="{'no_open': True, 'no_create': True}"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/form//div[@name='ordered_qty']" position="after">
+                <label for="base_uom_qty"/>
+                <div class="o_row" name="base_uom">
+                    <field name="base_uom_qty"/>
+                    <field name="base_uom_id" options="{'no_open': True, 'no_create': True}"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_order_line_tree_inherit_sale_custom" model="ir.ui.view">
+        <field name="name">sale.order.line.list.inherit.sale_custom</field>
+        <field name="model">sale.order.line</field>
+        <field name="inherit_id" ref="sale.view_order_line_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_uom_id']" position="after">
+                <field name="base_uom_qty" string="Base Unit Value"/>
+                <field name="base_uom_id" string="Base Unit"
+                       options="{'no_open': True, 'no_create': True}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="sale_order_line_view_form_readonly_inherit_sale_custom" model="ir.ui.view">
+        <field name="name">sale.order.line.form.readonly.inherit.sale_custom</field>
+        <field name="model">sale.order.line</field>
+        <field name="inherit_id" ref="sale.sale_order_line_view_form_readonly"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_uom_id']" position="after">
+                <field name="base_uom_qty"/>
+                <field name="base_uom_id" options="{'no_open': True, 'no_create': True}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
