@@ -7,7 +7,7 @@ _logger = logging.getLogger(__name__)
 
 class ItemRequestType(models.Model):
     _name = 'item.request.type'
-    _description = 'Item Request Types'
+    _description = 'Item Category'
     _order = 'sequence, name, id'
 
     name = fields.Char(string='Name', required=True)

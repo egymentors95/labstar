@@ -19,13 +19,13 @@ class ItemRequestLine(models.Model):
     )
     item_request_type = fields.Many2one(
         comodel_name='item.request.type',
-        string='Request Type',
+        string='Product Category',
         ondelete='set null',
     )
-    name = fields.Char(string='Item Name', required=True)
+    name = fields.Char(string='Product / Item', required=True)
     current_supplier_id = fields.Many2one(
         comodel_name='res.partner',
-        string='Current Supplier',
+        string='Current Supplier (Competitor)',
         ondelete='set null',
         context={'res_partner_search_mode': 'supplier'},
     )
@@ -36,4 +36,4 @@ class ItemRequestLine(models.Model):
         string='Currency',
         readonly=True,
     )
-    price = fields.Monetary(string='Price', currency_field='currency_id')
+    price = fields.Monetary(string='Competitor Price', currency_field='currency_id')

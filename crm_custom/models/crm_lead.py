@@ -17,7 +17,7 @@ class CrmLead(models.Model):
     )
     item_request_type = fields.Many2one(
         comodel_name='item.request.type',
-        string='Request Type',
+        string='Product Category',
         ondelete='set null',
         tracking=True,
     )
