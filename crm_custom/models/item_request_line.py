@@ -17,6 +17,13 @@ class ItemRequestLine(models.Model):
         ondelete='cascade',
         index=True,
     )
+    agent_id = fields.Many2one(
+        comodel_name='hr.employee',
+        string='Agent',
+        related='lead_id.agent',
+        store=True,
+        index=True,
+    )
     item_request_type = fields.Many2one(
         comodel_name='item.request.type',
         string='Product Category',
@@ -35,5 +42,6 @@ class ItemRequestLine(models.Model):
         related='lead_id.company_currency',
         string='Currency',
         readonly=True,
+        store=True,
     )
     price = fields.Monetary(string='Competitor Price', currency_field='currency_id')

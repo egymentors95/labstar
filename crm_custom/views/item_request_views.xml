@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Item Requirements reporting (simple list over item.request.line) -->
+
+    <record id="view_item_request_line_list_report" model="ir.ui.view">
+        <field name="name">item.request.line.list.report</field>
+        <field name="model">item.request.line</field>
+        <field name="arch" type="xml">
+            <list string="Item Requirements" create="false" edit="false" delete="false">
+                <field name="agent_id"/>
+                <field name="item_request_type"/>
+                <field name="name"/>
+                <field name="current_supplier_id" string="Current Supplier (Competitor)"/>
+                <field name="quantity" sum="Total"/>
+                <field name="price" sum="Total"/>
+                <field name="currency_id" column_invisible="True"/>
+                <field name="lead_id" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_item_request_line_search_report" model="ir.ui.view">
+        <field name="name">item.request.line.search.report</field>
+        <field name="model">item.request.line</field>
+        <field name="arch" type="xml">
+            <search string="Item Requirements">
+                <field name="name" string="Product / Item"/>
+                <field name="item_request_type"/>
+                <field name="current_supplier_id" string="Current Supplier"/>
+                <field name="agent_id"/>
+                <field name="lead_id"/>
+                <filter string="Undefined Agent" name="agent_unset" domain="[('agent_id', '=', False)]"/>
+                <group>
+                    <filter string="Agent" name="group_agent" context="{'group_by': 'agent_id'}"/>
+                    <filter string="Product Category" name="group_product_category" context="{'group_by': 'item_request_type'}"/>
+                    <filter string="Current Supplier (Competitor)" name="group_current_supplier" context="{'group_by': 'current_supplier_id'}"/>
+                    <filter string="Opportunity" name="group_lead" context="{'group_by': 'lead_id'}"/>
+                    <filter string="Created Month" name="group_create_date" context="{'group_by': 'create_date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_item_request_line_report" model="ir.actions.act_window">
+        <field name="name">Item Requirements</field>
+        <field name="res_model">item.request.line</field>
+        <field name="view_mode">list</field>
+        <field name="search_view_id" ref="view_item_request_line_search_report"/>
+        <field name="context">{'default_lead_type': 'opportunity'}</field>
+        <field name="domain">[('lead_id.type', '=', 'opportunity')]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_empty_list">
+                No item requirements yet.
+            </p>
+            <p>
+                Requested items created on CRM opportunities appear here with agent,
+                product category, competitor supplier, quantity and competitor price.
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+        id="menu_item_request_line_report"
+        name="Item Category"
+        parent="crm.crm_menu_report"
+        action="action_item_request_line_report"
+        sequence="5"
+        groups="sales_team.group_sale_manager"/>
+</odoo>
