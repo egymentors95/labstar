@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="view_company_form_sale_report_custom" model="ir.ui.view">
-        <field name="name">res.company.form.sales.custom</field>
+    <record id="view_company_form_print_custom" model="ir.ui.view">
+        <field name="name">res.company.form.print.custom</field>
         <field name="model">res.company</field>
         <field name="inherit_id" ref="base.view_company_form"/>
         <field name="arch" type="xml">
             <xpath expr="//notebook" position="inside">
-                <page string="Quotation Report" name="sale_report_custom">
+                <page string="Quotation Report" name="print_custom">
                     <group>
                         <field name="sc_bank_logo" widget="image" options="{'size': [0, 80]}"/>
                         <field name="sc_bank_details"/>

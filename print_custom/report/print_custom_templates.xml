@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Bank footer printed on sale.order, account.move and purchase.order
+        documents. No paperformat and no report actions are modified: the
+        reports keep their default paper formats.
+    -->
+    <template id="print_bank_footer">
+        <div t-if="o and o._name in ('sale.order', 'account.move', 'purchase.order')"
+             class="o_footer_content text-start"
+             style="width:100%;"
+             name="print_bank_footer">
+            <div t-if="company.sc_bank_logo or company.sc_bank_details">
+                <img t-if="company.sc_bank_logo"
+                     t-att-src="image_data_uri(company.sc_bank_logo)"
+                     alt="Bank"
+                     style="display:block; width:auto; height:auto; max-height:38px; max-width:165px; object-fit:contain; margin-bottom:1px;"/>
+                <div t-if="company.sc_bank_details"
+                     t-field="company.sc_bank_details"
+                     style="font-size:10px; line-height:1;"/>
+            </div>
+            <div t-elif="not is_html_empty(company.report_footer)"
+                 t-field="company.report_footer"/>
+            <div t-if="report_type == 'pdf'"
+                 style="border-top:1px solid #6c757d; margin-top:4px; padding-top:2px; color:#6c757d; font-size:12px; line-height:1.1; text-align:left; white-space:nowrap;">
+                Page <span class="page"/> / <span class="topage"/>
+            </div>
+        </div>
+    </template>
+
+    <template id="external_layout_standard_print_bank_footer"
+              inherit_id="web.external_layout_standard">
+        <xpath expr="//div[starts-with(normalize-space(@t-attf-class), 'footer ')]/div[contains(concat(' ', normalize-space(@class), ' '), ' o_footer_content ') or contains(concat(' ', normalize-space(@t-attf-class), ' '), ' o_footer_content ')]" position="before">
+            <t t-call="print_custom.print_bank_footer"/>
+        </xpath>
+        <xpath expr="//div[starts-with(normalize-space(@t-attf-class), 'footer ')]/div[contains(concat(' ', normalize-space(@class), ' '), ' o_footer_content ') or contains(concat(' ', normalize-space(@t-attf-class), ' '), ' o_footer_content ')]" position="attributes">
+            <attribute name="t-if">not (o and o._name in ('sale.order', 'account.move', 'purchase.order'))</attribute>
+        </xpath>
+    </template>
+
+    <template id="external_layout_striped_print_bank_footer"
+              inherit_id="web.external_layout_striped">
+        <xpath expr="//div[starts-with(normalize-space(@t-attf-class), 'footer ')]/div[contains(concat(' ', normalize-space(@class), ' '), ' o_footer_content ') or contains(concat(' ', normalize-space(@t-attf-class), ' '), ' o_footer_content ')]" position="before">
+            <t t-call="print_custom.print_bank_footer"/>
+        </xpath>
+        <xpath expr="//div[starts-with(normalize-space(@t-attf-class), 'footer ')]/div[contains(concat(' ', normalize-space(@class), ' '), ' o_footer_content ') or contains(concat(' ', normalize-space(@t-attf-class), ' '), ' o_footer_content ')]" position="attributes">
+            <attribute name="t-if">not (o and o._name in ('sale.order', 'account.move', 'purchase.order'))</attribute>
+        </xpath>
+    </template>
+
+    <template id="external_layout_boxed_print_bank_footer"
+              inherit_id="web.external_layout_boxed">
+        <xpath expr="//div[starts-with(normalize-space(@t-attf-class), 'footer ')]/div[contains(concat(' ', normalize-space(@class), ' '), ' o_footer_content ') or contains(concat(' ', normalize-space(@t-attf-class), ' '), ' o_footer_content ')]" position="before">
+            <t t-call="print_custom.print_bank_footer"/>
+        </xpath>
+        <xpath expr="//div[starts-with(normalize-space(@t-attf-class), 'footer ')]/div[contains(concat(' ', normalize-space(@class), ' '), ' o_footer_content ') or contains(concat(' ', normalize-space(@t-attf-class), ' '), ' o_footer_content ')]" position="attributes">
+            <attribute name="t-if">not (o and o._name in ('sale.order', 'account.move', 'purchase.order'))</attribute>
+        </xpath>
+    </template>
+
+    <template id="external_layout_bold_print_bank_footer"
+              inherit_id="web.external_layout_bold">
+        <xpath expr="//div[starts-with(normalize-space(@t-attf-class), 'footer ')]/div[contains(concat(' ', normalize-space(@class), ' '), ' o_footer_content ') or contains(concat(' ', normalize-space(@t-attf-class), ' '), ' o_footer_content ')]" position="before">
+            <t t-call="print_custom.print_bank_footer"/>
+        </xpath>
+        <xpath expr="//div[starts-with(normalize-space(@t-attf-class), 'footer ')]/div[contains(concat(' ', normalize-space(@class), ' '), ' o_footer_content ') or contains(concat(' ', normalize-space(@t-attf-class), ' '), ' o_footer_content ')]" position="attributes">
+            <attribute name="t-if">not (o and o._name in ('sale.order', 'account.move', 'purchase.order'))</attribute>
+        </xpath>
+    </template>
+
+    <template id="external_layout_folder_print_bank_footer"
+              inherit_id="web.external_layout_folder">
+        <xpath expr="//div[starts-with(normalize-space(@t-attf-class), 'footer ')]/div[contains(concat(' ', normalize-space(@class), ' '), ' o_footer_content ') or contains(concat(' ', normalize-space(@t-attf-class), ' '), ' o_footer_content ')]" position="before">
+            <t t-call="print_custom.print_bank_footer"/>
+        </xpath>
+        <xpath expr="//div[starts-with(normalize-space(@t-attf-class), 'footer ')]/div[contains(concat(' ', normalize-space(@class), ' '), ' o_footer_content ') or contains(concat(' ', normalize-space(@t-attf-class), ' '), ' o_footer_content ')]" position="attributes">
+            <attribute name="t-if">not (o and o._name in ('sale.order', 'account.move', 'purchase.order'))</attribute>
+        </xpath>
+    </template>
+
+    <template id="external_layout_wave_print_bank_footer"
+              inherit_id="web.external_layout_wave">
+        <xpath expr="//div[starts-with(normalize-space(@t-attf-class), 'footer ')]/div[contains(concat(' ', normalize-space(@class), ' '), ' o_footer_content ') or contains(concat(' ', normalize-space(@t-attf-class), ' '), ' o_footer_content ')]" position="before">
+            <t t-call="print_custom.print_bank_footer"/>
+        </xpath>
+        <xpath expr="//div[starts-with(normalize-space(@t-attf-class), 'footer ')]/div[contains(concat(' ', normalize-space(@class), ' '), ' o_footer_content ') or contains(concat(' ', normalize-space(@t-attf-class), ' '), ' o_footer_content ')]" position="attributes">
+            <attribute name="t-if">not (o and o._name in ('sale.order', 'account.move', 'purchase.order'))</attribute>
+        </xpath>
+    </template>
+
+    <template id="external_layout_bubble_print_bank_footer"
+              inherit_id="web.external_layout_bubble">
+        <xpath expr="//div[starts-with(normalize-space(@t-attf-class), 'footer ')]/div[contains(concat(' ', normalize-space(@class), ' '), ' o_footer_content ') or contains(concat(' ', normalize-space(@t-attf-class), ' '), ' o_footer_content ')]" position="before">
+            <t t-call="print_custom.print_bank_footer"/>
+        </xpath>
+        <xpath expr="//div[starts-with(normalize-space(@t-attf-class), 'footer ')]/div[contains(concat(' ', normalize-space(@class), ' '), ' o_footer_content ') or contains(concat(' ', normalize-space(@t-attf-class), ' '), ' o_footer_content ')]" position="attributes">
+            <attribute name="t-if">not (o and o._name in ('sale.order', 'account.move', 'purchase.order'))</attribute>
+        </xpath>
+    </template>
+</odoo>
